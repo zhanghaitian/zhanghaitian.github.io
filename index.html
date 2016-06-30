@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" />防止IE8,7进入怪异模式 -->
-<title>index</title>
+    <meta charset="utf-8"/>
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" />防止IE8,7进入怪异模式 -->
+    <title>index</title>
 
-
-<style type="text/css">
-	.u-video{width:100%;height:auto;}
-</style>
+    <link href="http://vjs.zencdn.net/4.3/video-js.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/4.3/video.js"></script>
 
 </head>
 <body>
 
-<div class="u-video">
-	<video poster="movie.jpg" controls width="100%">
-		<source src="htxh.mp4" type='video/mp4; codecs="avc1.4D401E, mp4a.40.2"'>
-	
-	</video>
-</div>
 
-
+<h1>Responsive Video.js Example (v4.3)</h1>
+<p></p>
+<video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto"
+       data-setup='{ "asdf": true }' poster="http://video-js.zencoder.com/oceans-clip.png">
+    <source src="http://zhanghaitian.github.io/htxh.mp4" type='video/mp4'>
+    <!--<source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm'>-->
+</video>
 
 </body>
 
+<script type="text/javascript">
+    videojs.autoSetup();
+
+    videojs('my_video_1').ready(function () {
+        // console.log(this.options()); //log all of the default videojs options
+
+        // Store the video object
+        var myPlayer = this, id = myPlayer.id();
+        // Make up an aspect ratio
+        var aspectRatio = 264 / 640;
+
+        function resizeVideoJS() {
+            var width = document.getElementById(id).parentElement.offsetWidth;
+            myPlayer.width(width).height(width * aspectRatio);
+
+        }
+
+        // Initialize resizeVideoJS()
+        resizeVideoJS();
+        // Then on resize call resizeVideoJS()
+        window.onresize = resizeVideoJS;
+    });
 
 </script>
+
 </html>
